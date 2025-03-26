@@ -99,9 +99,8 @@ p {
 }
 
 .logo-container {
-  width: 100px;
-  height: 50px;
-  background: var(--light-green);
+  width: 200px;
+  height: 100px;
   border-radius: 5px;
   display: flex;
   align-items: center;
