@@ -428,7 +428,7 @@ button:hover {
 
 /* eBook Section Styles */
 .ebook-section {
-  background: var(--white);
+  background: var(--background);
   padding: 30px;
   border-radius: 15px;
   margin: 30px 0;
