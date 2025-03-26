@@ -16,6 +16,17 @@
   --text-dark: #2d3436;
   --text-light: #636e72;
   --white: #ffffff;
+  --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  --card-shadow-hover: 0 8px 25px rgba(0, 0, 0, 0.1);
+  --transition-speed: 0.3s;
+
+  /* Typography variables */
+  --heading-size: clamp(22px, 2.5vw, 28px);
+  --subheading-size: clamp(18px, 2vw, 22px);
+  --body-size: clamp(16px, 1.8vw, 18px);
+  --small-size: clamp(14px, 1.5vw, 16px);
+  --line-height: 1.6;
+  --letter-spacing: 0.01em;
 }
 
 body {
@@ -23,8 +34,29 @@ body {
   min-height: 100vh;
   padding: 20px;
   color: var(--text-dark);
+  line-height: var(--line-height);
+  letter-spacing: var(--letter-spacing);
+  font-size: var(--body-size);
+  transition: all var(--transition-speed) ease;
 }
 
+/* Typography Enhancement */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 700;
+  line-height: 1.3;
+  margin-bottom: 0.5em;
+}
+
+p {
+  margin-bottom: 1em;
+}
+
+/* Enhanced Navbar */
 .navbar {
   background: var(--white);
   padding: 20px 30px;
@@ -32,13 +64,17 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--card-shadow);
   margin-bottom: 30px;
+  position: sticky;
+  top: 20px;
+  z-index: 100;
+  backdrop-filter: blur(5px);
 }
 
 .navbar h1 {
   color: var(--primary-green);
-  font-size: 28px;
+  font-size: var(--heading-size);
   font-weight: 700;
 }
 
@@ -53,12 +89,13 @@ body {
   font-weight: 500;
   padding: 8px 16px;
   border-radius: 8px;
-  transition: all 0.3s ease;
+  transition: all var(--transition-speed) ease;
 }
 
 .nav-links a:hover {
   background: var(--light-green);
   color: var(--primary-green);
+  transform: translateY(-2px);
 }
 
 .logo-container {
@@ -86,7 +123,7 @@ body {
   background: var(--white);
   padding: 20px;
   border-radius: 15px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--card-shadow);
 }
 
 input,
@@ -95,7 +132,7 @@ button {
   border: none;
   border-radius: 12px;
   font-size: 16px;
-  transition: all 0.3s ease;
+  transition: all var(--transition-speed) ease;
 }
 
 input {
@@ -128,7 +165,13 @@ button:hover {
   background: var(--secondary-orange);
   border-radius: 8px;
   padding: 10px 15px;
-  font-size: 14px;
+  font-size: var(--small-size);
+  opacity: 0.8;
+  transition: all var(--transition-speed) ease;
+}
+
+.word-card:hover .delete-btn {
+  opacity: 1;
 }
 
 .delete-btn:hover {
@@ -140,7 +183,7 @@ button:hover {
   padding: 30px;
   border-radius: 15px;
   margin: 30px 0;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--card-shadow);
 }
 
 .add-section h2 {
@@ -148,6 +191,7 @@ button:hover {
   margin-bottom: 20px;
 }
 
+/* Enhanced Dictionary Display */
 .dictionary {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -155,33 +199,120 @@ button:hover {
   margin-top: 30px;
 }
 
+/* View Toggler */
+.view-toggle {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+  gap: 10px;
+}
+
+.view-toggle button {
+  padding: 10px 20px;
+  background: var(--white);
+  color: var(--text-dark);
+  border: 2px solid var(--light-green);
+  border-radius: 8px;
+}
+
+.view-toggle button.active {
+  background: var(--primary-green);
+  color: var(--white);
+}
+
+/* Grid View (Default) */
+.dictionary.grid-view {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+}
+
+/* List View */
+.dictionary.list-view {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.dictionary.list-view .word-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto auto;
+  align-items: center;
+  gap: 20px;
+}
+
+.dictionary.list-view .word-card img {
+  grid-column: span 4;
+  height: 150px;
+  margin: 10px 0;
+}
+
+/* Enhanced Word Cards */
 .word-card {
   background: var(--white);
   padding: 20px;
   border-radius: 15px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-  transition: all 0.3s ease;
+  box-shadow: var(--card-shadow);
+  transition: all var(--transition-speed) ease;
   display: flex;
   flex-direction: column;
   gap: 15px;
   border: 2px solid transparent;
+  position: relative;
+  overflow: hidden;
+}
+
+.word-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 0;
+  background: var(--primary-green);
+  transition: height var(--transition-speed) ease;
 }
 
 .word-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--card-shadow-hover);
   border-color: var(--light-green);
+}
+
+.word-card:hover::before {
+  height: 100%;
 }
 
 .word-card h3 {
   color: var(--primary-green);
-  font-size: 22px;
-  margin-bottom: 5px;
+  font-size: var(--subheading-size);
+  font-weight: 700;
+  position: relative;
+  padding-bottom: 8px;
+}
+
+.word-card h3::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 40px;
+  height: 3px;
+  background: var(--light-green);
+  transition: width 0.3s ease;
+}
+
+.word-card:hover h3::after {
+  width: 80px;
 }
 
 .word-card p {
   color: var(--text-light);
-  font-size: 18px;
+  font-size: var(--body-size);
+  transition: all var(--transition-speed) ease;
+}
+
+.word-card:hover p {
+  color: var(--text-dark);
 }
 
 .word-card img {
@@ -190,6 +321,78 @@ button:hover {
   object-fit: cover;
   border-radius: 10px;
   margin: 10px 0;
+  transition: all var(--transition-speed) ease;
+  transform-origin: center;
+}
+
+.word-card:hover img {
+  transform: scale(1.02);
+}
+
+.word-card .buttons-container {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-top: auto;
+}
+
+.delete-btn,
+.edit-btn {
+  background: var(--secondary-orange);
+  border-radius: 8px;
+  padding: 10px 15px;
+  font-size: var(--small-size);
+  opacity: 0.8;
+  transition: all var(--transition-speed) ease;
+}
+
+.word-card:hover .delete-btn,
+.word-card:hover .edit-btn {
+  opacity: 1;
+}
+
+.delete-btn:hover {
+  background: var(--dark-orange);
+}
+
+.edit-btn {
+  background: var(--primary-green);
+}
+
+.edit-btn:hover {
+  background: var(--dark-green);
+}
+
+.highlighted {
+  animation: highlight-pulse 2s infinite;
+}
+
+@keyframes highlight-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(46, 204, 113, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(46, 204, 113, 0);
+  }
+}
+
+/* Word entrance animation */
+@keyframes word-entrance {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.word-card {
+  animation: word-entrance 0.4s ease forwards;
 }
 
 .letter-filter {
@@ -201,7 +404,7 @@ button:hover {
   background: var(--white);
   padding: 20px;
   border-radius: 15px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--card-shadow);
 }
 
 .letter-btn {
@@ -229,7 +432,7 @@ button:hover {
   padding: 30px;
   border-radius: 15px;
   margin: 30px 0;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--card-shadow);
 }
 
 .ebook-section h2 {
@@ -249,7 +452,7 @@ button:hover {
   background: var(--background);
   border-radius: 10px;
   overflow: hidden;
-  transition: transform 0.3s ease;
+  transition: transform var(--transition-speed) ease;
 }
 
 .ebook-card:hover {
@@ -317,7 +520,7 @@ button:hover {
   background: #e9ecef;
   border-radius: 12px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all var(--transition-speed) ease;
 }
 
 .file-input-label:hover {
@@ -334,6 +537,8 @@ button:hover {
     flex-direction: column;
     gap: 15px;
     text-align: center;
+    position: relative;
+    top: 0;
   }
 
   .nav-links {
@@ -345,12 +550,25 @@ button:hover {
     flex-direction: column;
   }
 
-  .dictionary {
+  .dictionary.grid-view {
     grid-template-columns: 1fr;
+  }
+
+  .dictionary.list-view .word-card {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .dictionary.list-view .word-card img {
+    grid-column: auto;
   }
 
   .ebook-grid {
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
+
+  .word-card .buttons-container {
+    justify-content: center;
   }
 }
 
@@ -360,7 +578,7 @@ button:hover {
   padding: 30px;
   border-radius: 15px;
   margin: 30px 0;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--card-shadow);
 }
 
 .about-content {
