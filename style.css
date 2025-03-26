@@ -2,31 +2,32 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Tajawal", "Arial", sans-serif;
+  font-family: "Tajawal", "Segoe UI", "Roboto", "Helvetica Neue", Arial,
+    sans-serif;
 }
 
 :root {
-  --primary-green: #2ecc71;
-  --secondary-orange: #e67e22;
-  --light-green: #a8e6cf;
-  --dark-green: #1abc9c;
-  --light-orange: #fde3a7;
+  --primary-green: #27ae60;
+  --secondary-orange: #f39c12;
+  --light-green: #e8f8f0;
+  --dark-green: #1e8449;
+  --light-orange: #fef5e7;
   --dark-orange: #d35400;
-  --background: #f0f7f4;
-  --text-dark: #2d3436;
-  --text-light: #636e72;
+  --background: #f8f9fa;
+  --text-dark: #343a40;
+  --text-light: #6c757d;
   --white: #ffffff;
-  --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-  --card-shadow-hover: 0 8px 25px rgba(0, 0, 0, 0.1);
-  --transition-speed: 0.3s;
+  --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+  --card-shadow-hover: 0 6px 20px rgba(0, 0, 0, 0.09);
+  --transition-speed: 0.25s;
 
   /* Typography variables */
-  --heading-size: clamp(22px, 2.5vw, 28px);
-  --subheading-size: clamp(18px, 2vw, 22px);
-  --body-size: clamp(16px, 1.8vw, 18px);
-  --small-size: clamp(14px, 1.5vw, 16px);
-  --line-height: 1.6;
-  --letter-spacing: 0.01em;
+  --heading-size: clamp(24px, 2.5vw, 30px);
+  --subheading-size: clamp(18px, 2vw, 20px);
+  --body-size: 16px;
+  --small-size: 14px;
+  --line-height: 1.7;
+  --letter-spacing: 0.02em;
 }
 
 body {
@@ -37,7 +38,8 @@ body {
   line-height: var(--line-height);
   letter-spacing: var(--letter-spacing);
   font-size: var(--body-size);
-  transition: all var(--transition-speed) ease;
+  transition: background var(--transition-speed) ease,
+    color var(--transition-speed) ease;
 }
 
 /* Typography Enhancement */
@@ -47,29 +49,30 @@ h3,
 h4,
 h5,
 h6 {
-  font-weight: 700;
+  font-weight: 600;
   line-height: 1.3;
   margin-bottom: 0.5em;
 }
 
 p {
-  margin-bottom: 1em;
+  margin-bottom: 1.2em;
 }
 
 /* Enhanced Navbar */
 .navbar {
-  background: var(--white);
-  padding: 20px 30px;
-  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.85);
+  padding: 15px 30px;
+  border-radius: 12px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   box-shadow: var(--card-shadow);
-  margin-bottom: 30px;
+  margin-bottom: 35px;
   position: sticky;
   top: 20px;
   z-index: 100;
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .navbar h1 {
@@ -87,21 +90,21 @@ p {
   color: var(--text-dark);
   text-decoration: none;
   font-weight: 500;
-  padding: 8px 16px;
-  border-radius: 8px;
+  padding: 10px 18px;
+  border-radius: 10px;
   transition: all var(--transition-speed) ease;
 }
 
 .nav-links a:hover {
   background: var(--light-green);
   color: var(--primary-green);
-  transform: translateY(-2px);
+  transform: translateY(-1px);
 }
 
 .logo-container {
-  width: 200px;
-  height: 100px;
-  border-radius: 5px;
+  width: 180px;
+  height: 90px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -115,58 +118,63 @@ p {
 }
 
 .search-add-container {
-  margin: 30px 0;
+  margin: 35px 0;
   display: flex;
   gap: 15px;
   flex-wrap: wrap;
   background: var(--white);
-  padding: 20px;
-  border-radius: 15px;
+  padding: 25px;
+  border-radius: 12px;
   box-shadow: var(--card-shadow);
 }
 
 input,
 button {
-  padding: 14px 20px;
-  border: none;
-  border-radius: 12px;
-  font-size: 16px;
+  padding: 12px 18px;
+  border: 1px solid #dee2e6;
+  border-radius: 10px;
+  font-size: var(--body-size);
   transition: all var(--transition-speed) ease;
 }
 
 input {
   flex: 1;
   min-width: 200px;
-  background: var(--background);
-  border: 2px solid transparent;
+  background: #f1f3f5;
+  border: 1px solid transparent;
 }
 
 input:focus {
   outline: none;
   border-color: var(--primary-green);
-  box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.2);
+  box-shadow: 0 0 0 3px rgba(39, 174, 96, 0.15);
+  background: var(--white);
 }
 
 button {
   background: var(--primary-green);
   color: var(--white);
   cursor: pointer;
-  font-weight: 600;
-  padding: 14px 25px;
+  font-weight: 500;
+  padding: 12px 22px;
+  border: none;
 }
 
 button:hover {
   background: var(--dark-green);
-  transform: translateY(-2px);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .delete-btn {
   background: var(--secondary-orange);
   border-radius: 8px;
-  padding: 10px 15px;
+  padding: 8px 14px;
   font-size: var(--small-size);
-  opacity: 0.8;
+  opacity: 0.9;
   transition: all var(--transition-speed) ease;
+  color: var(--white);
+  border: none;
 }
 
 .word-card:hover .delete-btn {
@@ -175,13 +183,14 @@ button:hover {
 
 .delete-btn:hover {
   background: var(--dark-orange);
+  transform: translateY(-1px);
 }
 
 .add-section {
   background: var(--white);
   padding: 30px;
-  border-radius: 15px;
-  margin: 30px 0;
+  border-radius: 12px;
+  margin: 35px 0;
   box-shadow: var(--card-shadow);
 }
 
@@ -193,69 +202,97 @@ button:hover {
 /* Enhanced Dictionary Display */
 .dictionary {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 25px;
-  margin-top: 30px;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 30px;
+  margin-top: 35px;
 }
 
 /* View Toggler */
 .view-toggle {
   display: flex;
   justify-content: center;
-  margin: 20px 0;
-  gap: 10px;
+  margin: 25px 0;
+  gap: 12px;
 }
 
 .view-toggle button {
   padding: 10px 20px;
   background: var(--white);
   color: var(--text-dark);
-  border: 2px solid var(--light-green);
-  border-radius: 8px;
+  border: 1px solid #dee2e6;
+  border-radius: 10px;
+  font-weight: 500;
 }
 
 .view-toggle button.active {
   background: var(--primary-green);
   color: var(--white);
+  border-color: var(--primary-green);
+}
+
+.view-toggle button:not(.active):hover {
+  background: #f8f9fa;
+  border-color: #ced4da;
+  transform: translateY(-1px);
 }
 
 /* Grid View (Default) */
 .dictionary.grid-view {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 }
 
 /* List View */
 .dictionary.list-view {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 20px;
 }
 
 .dictionary.list-view .word-card {
   display: grid;
-  grid-template-columns: 1fr 1fr auto auto;
+  grid-template-columns: minmax(120px, auto) 1fr auto;
   align-items: center;
-  gap: 20px;
+  gap: 15px 25px;
+  padding: 25px;
+}
+
+.dictionary.list-view .word-card h3 {
+  grid-column: 1 / 2;
+  margin-bottom: 0;
+}
+
+.dictionary.list-view .word-card p {
+  grid-column: 2 / 3;
+  margin-bottom: 0;
 }
 
 .dictionary.list-view .word-card img {
-  grid-column: span 4;
-  height: 150px;
-  margin: 10px 0;
+  grid-column: 1 / -1;
+  height: auto;
+  max-height: 250px;
+  margin: 15px 0 5px 0;
+  order: 3;
+}
+
+.dictionary.list-view .word-card .buttons-container {
+  grid-column: 3 / 4;
+  justify-self: end;
+  margin-top: 0;
+  order: 2;
 }
 
 /* Enhanced Word Cards */
 .word-card {
   background: var(--white);
-  padding: 20px;
-  border-radius: 15px;
+  padding: 25px;
+  border-radius: 12px;
   box-shadow: var(--card-shadow);
   transition: all var(--transition-speed) ease;
   display: flex;
   flex-direction: column;
-  gap: 15px;
-  border: 2px solid transparent;
+  gap: 10px;
+  border: 1px solid transparent;
   position: relative;
   overflow: hidden;
 }
@@ -265,14 +302,15 @@ button:hover {
   position: absolute;
   top: 0;
   left: 0;
-  width: 4px;
+  width: 5px;
   height: 0;
   background: var(--primary-green);
-  transition: height var(--transition-speed) ease;
+  transition: height var(--transition-speed) ease-out;
+  border-radius: 0 0 5px 5px;
 }
 
 .word-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-4px);
   box-shadow: var(--card-shadow-hover);
   border-color: var(--light-green);
 }
@@ -284,9 +322,10 @@ button:hover {
 .word-card h3 {
   color: var(--primary-green);
   font-size: var(--subheading-size);
-  font-weight: 700;
+  font-weight: 600;
   position: relative;
-  padding-bottom: 8px;
+  padding-bottom: 10px;
+  margin-bottom: 5px;
 }
 
 .word-card h3::after {
@@ -294,20 +333,23 @@ button:hover {
   position: absolute;
   bottom: 0;
   left: 0;
-  width: 40px;
+  width: 30px;
   height: 3px;
   background: var(--light-green);
+  border-radius: 3px;
   transition: width 0.3s ease;
 }
 
 .word-card:hover h3::after {
-  width: 80px;
+  width: 60px;
 }
 
 .word-card p {
   color: var(--text-light);
   font-size: var(--body-size);
-  transition: all var(--transition-speed) ease;
+  transition: color var(--transition-speed) ease;
+  line-height: 1.6;
+  margin-bottom: 10px;
 }
 
 .word-card:hover p {
@@ -316,42 +358,46 @@ button:hover {
 
 .word-card img {
   width: 100%;
-  height: 200px;
+  height: 180px;
   object-fit: cover;
-  border-radius: 10px;
-  margin: 10px 0;
-  transition: all var(--transition-speed) ease;
+  border-radius: 8px;
+  margin: 10px 0 15px 0;
+  transition: transform var(--transition-speed) ease;
   transform-origin: center;
 }
 
 .word-card:hover img {
-  transform: scale(1.02);
+  transform: scale(1.03);
 }
 
 .word-card .buttons-container {
   display: flex;
-  gap: 10px;
+  gap: 8px;
   justify-content: flex-end;
   margin-top: auto;
+  flex-wrap: wrap;
 }
 
 .delete-btn,
 .edit-btn {
   background: var(--secondary-orange);
   border-radius: 8px;
-  padding: 10px 15px;
+  padding: 8px 14px;
   font-size: var(--small-size);
-  opacity: 0.8;
+  opacity: 0;
   transition: all var(--transition-speed) ease;
+  transform: translateY(5px);
 }
 
 .word-card:hover .delete-btn,
 .word-card:hover .edit-btn {
   opacity: 1;
+  transform: translateY(0);
 }
 
 .delete-btn:hover {
   background: var(--dark-orange);
+  transform: translateY(-1px);
 }
 
 .edit-btn {
@@ -360,6 +406,19 @@ button:hover {
 
 .edit-btn:hover {
   background: var(--dark-green);
+  transform: translateY(-1px);
+}
+
+/* Style for the Cancel Edit button in the form */
+.cancel-btn {
+  background: var(--text-light);
+  border: none;
+}
+
+.cancel-btn:hover {
+  background: var(--text-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .highlighted {
@@ -395,42 +454,47 @@ button:hover {
 }
 
 .letter-filter {
-  margin: 30px 0;
+  margin: 35px 0;
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 8px;
   justify-content: center;
   background: var(--white);
-  padding: 20px;
-  border-radius: 15px;
+  padding: 20px 25px;
+  border-radius: 12px;
   box-shadow: var(--card-shadow);
 }
 
 .letter-btn {
-  background: var(--background);
+  background: var(--white);
   color: var(--text-dark);
-  padding: 10px 18px;
-  border-radius: 10px;
-  font-weight: 600;
-  border: 2px solid transparent;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 500;
+  border: 1px solid #dee2e6;
+  transition: all var(--transition-speed) ease;
 }
 
 .letter-btn:hover {
   background: var(--light-green);
-  transform: translateY(-2px);
+  border-color: var(--light-green);
+  color: var(--primary-green);
+  transform: translateY(-1px);
 }
 
 .letter-btn.active {
   background: var(--primary-green);
   color: var(--white);
+  border-color: var(--primary-green);
+  box-shadow: 0 2px 5px rgba(39, 174, 96, 0.2);
 }
 
 /* eBook Section Styles */
 .ebook-section {
-  background: var(--background);
-  padding: 30px;
-  border-radius: 15px;
-  margin: 30px 0;
+  background: var(--white);
+  padding: 35px;
+  border-radius: 12px;
+  margin: 35px 0;
   box-shadow: var(--card-shadow);
 }
 
@@ -442,26 +506,31 @@ button:hover {
 
 .ebook-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 20px;
-  padding: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 25px;
+  padding: 20px 0 0 0;
 }
 
 .ebook-card {
-  background: var(--background);
+  background: var(--white);
   border-radius: 10px;
   overflow: hidden;
-  transition: transform var(--transition-speed) ease;
+  transition: transform var(--transition-speed) ease,
+    box-shadow var(--transition-speed) ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .ebook-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-4px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
 }
 
 .ebook-cover {
   width: 100%;
-  height: 250px;
+  height: auto;
+  aspect-ratio: 2 / 3;
   object-fit: cover;
+  display: block;
 }
 
 .decorative-shape {
@@ -510,16 +579,18 @@ button:hover {
 
 /* Custom file input styling */
 .file-input-container {
-  margin: 15px 0;
+  margin: 20px 0 15px 0;
 }
 
 .file-input-label {
   display: inline-block;
-  padding: 14px 25px;
+  padding: 12px 22px;
   background: #e9ecef;
-  border-radius: 12px;
+  border-radius: 10px;
   cursor: pointer;
   transition: all var(--transition-speed) ease;
+  color: var(--text-dark);
+  font-weight: 500;
 }
 
 .file-input-label:hover {
@@ -532,12 +603,17 @@ button:hover {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+  body {
+    padding: 15px;
+  }
+
   .navbar {
     flex-direction: column;
     gap: 15px;
     text-align: center;
-    position: relative;
-    top: 0;
+    position: sticky;
+    top: 15px;
+    padding: 15px;
   }
 
   .nav-links {
@@ -545,25 +621,50 @@ button:hover {
     justify-content: center;
   }
 
-  .search-add-container {
-    flex-direction: column;
+  .search-add-container,
+  .add-section,
+  .letter-filter,
+  .ebook-section,
+  .about-section {
+    padding: 20px;
+    margin: 25px 0;
   }
 
   .dictionary.grid-view {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+  }
+
+  .dictionary.list-view {
+    gap: 15px;
   }
 
   .dictionary.list-view .word-card {
-    grid-template-columns: 1fr;
-    text-align: center;
+    grid-template-columns: 1fr auto;
+    padding: 20px;
+    gap: 10px 15px;
   }
 
+  .dictionary.list-view .word-card h3 {
+    grid-column: 1 / 2;
+  }
+  .dictionary.list-view .word-card p {
+    grid-column: 1 / 2;
+  }
+  .dictionary.list-view .word-card .buttons-container {
+    grid-column: 2 / 3;
+    grid-row: 1 / 3;
+    align-self: center;
+  }
   .dictionary.list-view .word-card img {
-    grid-column: auto;
+    grid-column: 1 / -1;
+    order: 4;
+    margin-top: 15px;
   }
 
   .ebook-grid {
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 15px;
   }
 
   .word-card .buttons-container {
@@ -574,9 +675,9 @@ button:hover {
 /* About Section Styles */
 .about-section {
   background: var(--white);
-  padding: 30px;
-  border-radius: 15px;
-  margin: 30px 0;
+  padding: 35px;
+  border-radius: 12px;
+  margin: 35px 0;
   box-shadow: var(--card-shadow);
 }
 
@@ -593,6 +694,41 @@ button:hover {
 
 .about-content p {
   color: var(--text-light);
-  line-height: 1.6;
-  font-size: 18px;
+  line-height: 1.8;
+  font-size: var(--body-size);
+}
+
+/* Back to Top Button Styles */
+#backToTopBtn {
+  display: none; /* Hidden by default */
+  position: fixed; /* Fixed position */
+  bottom: 30px; /* Distance from bottom */
+  right: 30px; /* Distance from right */
+  z-index: 99; /* Ensure it's above other elements */
+  border: none; /* Remove border */
+  outline: none; /* Remove outline */
+  background-color: var(--primary-green); /* Button background color */
+  color: white; /* Text color */
+  cursor: pointer; /* Pointer cursor on hover */
+  padding: 12px 16px; /* Padding */
+  border-radius: 10px; /* Rounded corners */
+  font-size: 16px; /* Increase font size */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow */
+  transition: background-color var(--transition-speed) ease, opacity 0.5s,
+    visibility 0.5s; /* Smooth transitions */
+}
+
+#backToTopBtn:hover {
+  background-color: var(--dark-green); /* Darker background on hover */
+}
+
+/* Media query adjustments if needed */
+@media (max-width: 768px) {
+  #backToTopBtn {
+    bottom: 20px;
+    right: 20px;
+    padding: 10px 14px;
+    font-size: 14px;
+  }
+  /* ... rest of media query ... */
 }

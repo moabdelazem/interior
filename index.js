@@ -120,6 +120,7 @@ function displayDictionary(words = dictionary) {
     // Buttons container for better organization
     const buttonsHTML = `
             <div class="buttons-container">
+              <button class="edit-btn" onclick="editWord('${english}')">تعديل</button>
               <button class="delete-btn" onclick="deleteWord('${english}')">حذف الكلمة</button>
               ${
                 word.image
@@ -195,20 +196,111 @@ function addWord() {
   const imageInput = document.getElementById("imageInput");
 
   if (english && arabic) {
+    // Check if word already exists (prevent duplicates on add)
+    if (dictionary[english]) {
+      alert(`الكلمة "${english}" موجودة بالفعل.`);
+      return;
+    }
     if (imageInput.files[0]) {
       const reader = new FileReader();
       reader.onload = function (e) {
         dictionary[english] = { arabic, image: e.target.result };
         saveAndUpdate();
+        resetAddForm(); // Reset form after adding
       };
       reader.readAsDataURL(imageInput.files[0]);
     } else {
       dictionary[english] = { arabic, image: "" };
       saveAndUpdate();
+      resetAddForm(); // Reset form after adding
     }
-    document.getElementById("englishInput").value = "";
-    document.getElementById("arabicInput").value = "";
-    imageInput.value = "";
+    // Moved resetAddForm inside async/sync branches
+    // document.getElementById("englishInput").value = "";
+    // document.getElementById("arabicInput").value = "";
+    // imageInput.value = "";
+  } else {
+    alert("يرجى إدخال الكلمة بالإنجليزية والعربية.");
+  }
+}
+
+// تعديل كلمة (جديد)
+function editWord(english) {
+  const word = dictionary[english];
+  if (!word) return;
+
+  document.getElementById("englishInput").value = english;
+  document.getElementById("arabicInput").value = word.arabic;
+  document.getElementById("imageInput").value = ""; // Clear file input
+
+  // Disable English input during edit to prevent key change issues
+  document.getElementById("englishInput").disabled = true;
+
+  // Change button to "Update"
+  const addButton = document.querySelector(".add-section button");
+  addButton.textContent = "تحديث الكلمة";
+  addButton.onclick = () => updateWord(english); // Pass original key
+
+  // Add a Cancel button if it doesn't exist
+  let cancelButton = document.getElementById("cancelEditBtn");
+  if (!cancelButton) {
+    cancelButton = document.createElement("button");
+    cancelButton.id = "cancelEditBtn";
+    cancelButton.textContent = "إلغاء التعديل";
+    cancelButton.onclick = resetAddForm;
+    cancelButton.style.marginLeft = "10px"; // Add some space
+    cancelButton.classList.add("cancel-btn"); // Add class for styling
+    addButton.parentNode.insertBefore(cancelButton, addButton.nextSibling);
+  }
+  cancelButton.style.display = "inline-block"; // Ensure it's visible
+
+  // Scroll to the form for better UX
+  document.querySelector(".add-section").scrollIntoView({ behavior: "smooth" });
+}
+
+// تحديث كلمة (جديد)
+function updateWord(originalEnglish) {
+  const arabic = document.getElementById("arabicInput").value.trim();
+  const imageInput = document.getElementById("imageInput");
+
+  if (arabic) {
+    // English input is disabled, so no need to check it
+    const currentWord = dictionary[originalEnglish];
+    if (!currentWord) return; // Should not happen, but good practice
+
+    if (imageInput.files[0]) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        dictionary[originalEnglish] = { arabic, image: e.target.result };
+        saveAndUpdate();
+        resetAddForm(); // Reset form after update
+      };
+      reader.readAsDataURL(imageInput.files[0]);
+    } else {
+      // Keep existing image if no new one is selected
+      dictionary[originalEnglish] = { arabic, image: currentWord.image };
+      saveAndUpdate();
+      resetAddForm(); // Reset form after update
+    }
+  } else {
+    alert("يرجى إدخال الترجمة بالعربية.");
+  }
+}
+
+// إعادة تعيين نموذج الإضافة (جديد)
+function resetAddForm() {
+  document.getElementById("englishInput").value = "";
+  document.getElementById("arabicInput").value = "";
+  document.getElementById("imageInput").value = "";
+  document.getElementById("englishInput").disabled = false; // Re-enable English input
+
+  const addButton = document.querySelector(".add-section button");
+  addButton.textContent = "إضافة كلمة جديدة";
+  addButton.onclick = addWord;
+
+  // Hide the Cancel button
+  const cancelButton = document.getElementById("cancelEditBtn");
+  if (cancelButton) {
+    cancelButton.style.display = "none";
   }
 }
 
@@ -232,6 +324,8 @@ function deleteImage(english) {
 function saveAndUpdate() {
   localStorage.setItem("dictionary", JSON.stringify(dictionary));
   filterByLetter(currentFilter);
+  // Consider resetting the form if an edit was in progress but deleted
+  // resetAddForm(); // Optional: Reset form after any save? Decide based on UX preference.
 }
 
 // إنشاء أزرار الفلترة حسب الحروف
@@ -276,6 +370,7 @@ function filterByLetter(letter) {
 // تهيئة الصفحة
 createLetterFilter();
 displayDictionary();
+resetAddForm(); // Ensure form is in 'Add' mode initially
 
 // Add event listener for keyboard shortcuts
 document.addEventListener("keydown", function (e) {
@@ -290,3 +385,29 @@ document.addEventListener("keydown", function (e) {
     toggleView("list");
   }
 });
+
+// --- Back to Top Button Logic ---
+
+// Get the button
+let mybutton = document.getElementById("backToTopBtn");
+
+// When the user scrolls down 200px from the top of the document, show the button
+window.onscroll = function () {
+  scrollFunction();
+};
+
+function scrollFunction() {
+  if (
+    document.body.scrollTop > 200 ||
+    document.documentElement.scrollTop > 200
+  ) {
+    mybutton.style.display = "block";
+  } else {
+    mybutton.style.display = "none";
+  }
+}
+
+// When the user clicks on the button, scroll to the top of the document smoothly
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
