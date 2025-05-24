@@ -24,7 +24,7 @@
   /* Typography variables */
   --heading-size: clamp(24px, 2.5vw, 30px);
   --subheading-size: clamp(18px, 2vw, 20px);
-  --body-size: 16px;
+  --body-size: 18px;
   --small-size: 14px;
   --line-height: 1.7;
   --letter-spacing: 0.02em;
